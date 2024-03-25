@@ -22,3 +22,20 @@
     text-wrap: balance;
   }
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #FFF5DC;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #744E15;
+  border: 2px solid #FFF5DC;
+  border-radius: 10px;
+}
