@@ -1,6 +1,6 @@
 import { SetStateAction, useEffect, useState } from "react";
 import React from "react";
-import { extractValuesFromTimeStr } from "../utils/timeValidation";
+import { extractValuesFromTimeStr } from "../../utils/timeValidation";
 
 interface StartEndTimeSelectorPropsType {
   startTime: string;

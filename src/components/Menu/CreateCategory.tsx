@@ -1,10 +1,11 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Modal from "../Modal";
-import Input from "../Input";
-import StartEndTimeSelector from "../TimeSelector";
+import TextInput from "../input/TextInput";
+import StartEndTimeSelector from "../input/TimeSelector";
 import { Category, CategoryType, DisplayCategoryType } from "../../types";
 import { validateStartEndTimes } from "@/src/utils/timeValidation";
 import toast from "react-hot-toast";
+import { createCategory } from "@/src/services/categories";
 
 interface CreateCategoryTypes {
   closeFunc: Dispatch<SetStateAction<boolean>>;
@@ -33,19 +34,22 @@ const CreateCategory = ({
       const body = {
         name: name,
       };
-      toast.success("Successfully created!");
 
-      console.log(body);
+      const newCategory = await createCategory(body, target);
+
+      console.log(newCategory);
 
       setCategories((prevCategories: Category[]) => {
-        console.log([...prevCategories, body]);
-        return [...prevCategories, body];
+        console.log([...prevCategories, newCategory]);
+        return [...prevCategories, newCategory];
       });
-      setSelectedCategory(body);
+      setSelectedCategory(newCategory);
+
+      toast.success("Successfully created!");
 
       closeFunc(false);
 
-      return
+      return;
     }
 
     if (validateStartEndTimes(startTime, endTime)) {
@@ -55,15 +59,17 @@ const CreateCategory = ({
         endTime: endTime,
       };
 
-      toast.success("Successfully created!");
+      const newCategory = await createCategory(body, target);
 
-      console.log(body);
+      console.log(newCategory);
 
       setCategories((prevCategories: Category[]) => {
         console.log([...prevCategories, body]);
         return [...prevCategories, body];
       });
       setSelectedCategory(body);
+
+      toast.success("Successfully created!");
 
       closeFunc(false);
     } else {
@@ -79,11 +85,9 @@ const CreateCategory = ({
         </div>
         <div className="mt-4">
           <div>
-            <Input
+            <TextInput
               label="Name"
-              onChange={(e: { target: { value: string } }) =>
-                setName(e.target.value)
-              }
+              onChange={(e) => setName(e.target.value)}
               value={name}
             />
             {target == CategoryType.DAILY_MEAL && (

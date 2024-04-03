@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import CategoriesView from "../../../components/menu/CategoriesView";
+import CategoriesView from "../../../components/Menu/CategoriesView";
 import { CategoryType } from "../../../types";
 
 const MenuPage = () => {

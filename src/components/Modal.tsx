@@ -12,7 +12,7 @@ const Modal = ({ closeFunc, children }: ModalTypes) => {
       <div className="w-fit bg-white rounded-lg relative h-fit p-4">
         <button
           onClick={closeFunc}
-          className="flex justify-center items-center bg-red-700 rounded-full p-2 text-white text-xl absolute top-2 right-2"
+          className="flex z-50 justify-center items-center bg-red-700 rounded-full p-2 text-white text-xl absolute top-2 right-2"
         >
           <FaTimes />
         </button>
