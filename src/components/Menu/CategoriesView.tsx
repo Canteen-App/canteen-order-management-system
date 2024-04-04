@@ -164,6 +164,7 @@ const CategoriesView = ({ target }: { target: CategoryType }) => {
           target={target}
           closeFunc={setOpenEditItemForm}
           item={selectedItem}
+          setItem={setSelectedItem}
           setItems={setItems}
         />
       )}

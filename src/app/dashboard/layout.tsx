@@ -7,10 +7,11 @@ import {
 } from "react-icons/fa";
 import "../globals.css";
 import Link from "next/link";
-import { AuthProvider } from "@/context/auth";
 import { Toaster } from "react-hot-toast";
 import { signOut } from "firebase/auth";
-import { auth } from "@/config/firebase";
+import React from "react";
+import { auth } from "../../../config/firebase";
+import { AuthProvider } from "../../../context/auth";
 
 export default function RootLayout({
   children,

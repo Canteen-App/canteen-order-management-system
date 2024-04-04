@@ -9,12 +9,19 @@ import { uploadFile } from "../../utils/fileUpload";
 
 interface EditItemPropsType {
   item: Item;
+  setItem: Dispatch<SetStateAction<Item | null>>;
   closeFunc: Dispatch<SetStateAction<boolean>>;
   setItems: Dispatch<SetStateAction<Item[]>>;
   target: CategoryType;
 }
 
-const EditItem = ({ setItems, item, closeFunc, target }: EditItemPropsType) => {
+const EditItem = ({
+  setItems,
+  item,
+  setItem,
+  closeFunc,
+  target,
+}: EditItemPropsType) => {
   const [name, setName] = useState(item.name);
   const [price, setPrice] = useState(item.price);
   const [file, setFile] = useState<File | null>(null);
@@ -43,6 +50,8 @@ const EditItem = ({ setItems, item, closeFunc, target }: EditItemPropsType) => {
       };
 
       const newItem = await editItem(item.id, body);
+
+      setItem(newItem);
 
       setItems((prevItems) =>
         prevItems.map((prevItem) =>
