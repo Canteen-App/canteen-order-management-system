@@ -46,17 +46,18 @@ const CreateItem = ({
           console.log(updatedItem);
           setItems((prevItems: any) => [updatedItem, ...prevItems]);
           closeFunc(false);
+          return;
         }
+      } else {
+        setItems((prevItems: any) => [newItem, ...prevItems]);
+        closeFunc(false);
       }
-
-      setItems((prevItems: any) => [newItem, ...prevItems]);
-      closeFunc(false);
     }
   };
 
   return (
     <Modal closeFunc={() => closeFunc(false)}>
-      <div className="w-[600px]">
+      <div className="w-[600px] max-h-[90vh] z-50 overflow-y-auto">
         <div className="flex gap-2 items-center">
           <div className="text-2xl font-black w-fit bg-primary text-white rounded-lg p-2">
             {category.name}

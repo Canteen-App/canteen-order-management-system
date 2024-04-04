@@ -1,9 +1,9 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Modal from "../Modal";
-import { Item } from "@/src/types";
 import { FaEdit } from "react-icons/fa";
 
 import EditItem from "../Menu/EditItem";
+import { Item } from "../../types";
 
 interface ItemDetailsViewPropsType {
   closeFunc: Dispatch<SetStateAction<boolean>>;

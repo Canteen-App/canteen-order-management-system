@@ -8,8 +8,8 @@ import ItemDetailsView from "./ItemDetailsView";
 import { Category, CategoryType, DisplayCategoryType, Item } from "../../types";
 import { getCategories } from "../../services/categories";
 import CreateItem from "./CreateItem";
-import { getItemsByCategory } from "@/src/services/items";
 import EditItem from "./EditItem";
+import { getItemsByCategory } from "../../services/items";
 
 const CategoriesView = ({ target }: { target: CategoryType }) => {
   // Category Data State

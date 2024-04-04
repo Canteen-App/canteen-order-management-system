@@ -8,7 +8,7 @@ interface ModalTypes {
 
 const Modal = ({ closeFunc, children }: ModalTypes) => {
   return (
-    <div className="w-full flex justify-center items-center h-screen top-0 fixed bg-[#00000060]">
+    <div className="w-full flex justify-center z-50 items-center h-screen top-0 fixed bg-[#00000060]">
       <div className="w-fit bg-white rounded-lg relative h-fit p-4">
         <button
           onClick={closeFunc}
