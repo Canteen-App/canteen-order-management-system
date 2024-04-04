@@ -1,15 +1,32 @@
 "use client";
-import { FaHome, FaHamburger, FaFileSignature } from "react-icons/fa";
+import {
+  FaHome,
+  FaHamburger,
+  FaFileSignature,
+  FaSignOutAlt,
+} from "react-icons/fa";
 import "../globals.css";
 import Link from "next/link";
 import { AuthProvider } from "@/context/auth";
 import { Toaster } from "react-hot-toast";
+import { signOut } from "firebase/auth";
+import { auth } from "@/config/firebase";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
+
   return (
     <AuthProvider>
       <div className="flex w-full ">
@@ -32,6 +49,13 @@ export default function RootLayout({
           >
             <FaFileSignature />
           </Link>
+          <div className="flex-grow" />
+          <div
+            onClick={logout}
+            className="text-red-800 mb-2 cursor-pointer hover:bg-red-800 hover:text-white rounded-lg p-2 text-xl"
+          >
+            <FaSignOutAlt />
+          </div>
         </div>
         <div className="w-full">{children}</div>
       </div>
