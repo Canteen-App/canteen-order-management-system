@@ -43,11 +43,8 @@ export const validateStartEndTimes = (startTime: string, endTime: string) => {
   const startTimeDateTime = convertTimeToDate(startTime);
   const endTimeDateTime = convertTimeToDate(endTime);
 
-  console.log(startTimeDateTime)
-  console.log(endTimeDateTime)
 
   if (startTimeDateTime && endTimeDateTime) {
-    console.log(startTimeDateTime < endTimeDateTime)
     return startTimeDateTime < endTimeDateTime;
   }
 

@@ -37,10 +37,9 @@ const CreateCategory = ({
 
       const newCategory = await createCategory(body, target);
 
-      console.log(newCategory);
+
 
       setCategories((prevCategories: Category[]) => {
-        console.log([...prevCategories, newCategory]);
         return [...prevCategories, newCategory];
       });
       setSelectedCategory(newCategory);
@@ -61,10 +60,8 @@ const CreateCategory = ({
 
       const newCategory = await createCategory(body, target);
 
-      console.log(newCategory);
 
       setCategories((prevCategories: Category[]) => {
-        console.log([...prevCategories, body]);
         return [...prevCategories, body];
       });
       setSelectedCategory(body);

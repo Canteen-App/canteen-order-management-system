@@ -65,7 +65,6 @@ const EditItem = ({
       const imageURL = await uploadFile(file, item.id, target);
       if (imageURL) {
         const updatedItem = await setItemImage(item.id, imageURL);
-        console.log(updatedItem);
         setItems((prevItems) =>
           prevItems.map((prevItem) =>
             prevItem.id == updatedItem.id ? updatedItem : prevItem

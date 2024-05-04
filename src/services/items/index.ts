@@ -43,3 +43,8 @@ export const setItemImage = async (
   });
   return response.data;
 };
+
+export const getItemOrderDetails = async (itemId: string): Promise<Item> => {
+  const response = await fetchAPI.get(`/item/${itemId}/today-orders`);
+  return response.data;
+};

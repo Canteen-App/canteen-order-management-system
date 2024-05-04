@@ -1,4 +1,5 @@
 import Image from "next/image";
+import React from "react";
 import { useEffect } from "react";
 
 interface ItemCardPropsType {
@@ -14,9 +15,7 @@ export default function ItemCard({
   price,
   imageURL,
 }: ItemCardPropsType) {
-  useEffect(() => {
-    console.log(name, price);
-  }, [name, price]);
+
 
   return (
     <div

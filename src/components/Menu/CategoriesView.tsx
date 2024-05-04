@@ -28,16 +28,12 @@ const CategoriesView = ({ target }: { target: CategoryType }) => {
   const [openCreateItemForm, setOpenCreateItemForm] = useState(false);
   const [openEditItemForm, setOpenEditItemForm] = useState(false);
 
-  useEffect(() => {
-    console.log(items);
-  }, [items]);
-
   // Get Categories
   useEffect(() => {
     const getData = async () => {
-      const fetched_categories = await getCategories(target);
-      setCategories(fetched_categories);
-      setSelectedCategory(fetched_categories[0]);
+      const fetchedCategories = await getCategories(target);
+      setCategories(fetchedCategories);
+      setSelectedCategory(fetchedCategories[0]);
     };
 
     getData();
@@ -47,8 +43,8 @@ const CategoriesView = ({ target }: { target: CategoryType }) => {
   useEffect(() => {
     const getData = async () => {
       if (selectedCategory?.id) {
-        const fetched_items = await getItemsByCategory(selectedCategory.id);
-        setItems(fetched_items);
+        const fetchedItems = await getItemsByCategory(selectedCategory.id);
+        setItems(fetchedItems);
       }
     };
 

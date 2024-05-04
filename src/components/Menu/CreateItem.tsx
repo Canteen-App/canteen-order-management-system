@@ -34,16 +34,12 @@ const CreateItem = ({
         categoryId: category.id,
       };
 
-      console.log(body);
 
       const newItem = await createItem(body);
-      console.log(newItem);
-
       if (newItem.id && file && target) {
         const imageURL = await uploadFile(file, newItem.id, target);
         if (imageURL) {
           const updatedItem = await setItemImage(newItem.id, imageURL);
-          console.log(updatedItem);
           setItems((prevItems: any) => [updatedItem, ...prevItems]);
           closeFunc(false);
           return;

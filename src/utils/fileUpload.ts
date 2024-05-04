@@ -11,7 +11,6 @@ export const uploadFile = async (
   await uploadBytes(fileRef, file).then(() => {
     alert("Uploaded successfully");
   });
-  console.log(fileRef);
   const fileUrl = await getDownloadURL(fileRef);
   return fileUrl;
 };

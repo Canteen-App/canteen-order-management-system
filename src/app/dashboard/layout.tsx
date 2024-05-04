@@ -45,7 +45,7 @@ export default function RootLayout({
             <FaHamburger />
           </Link>
           <Link
-            href="/dashboard"
+            href="/dashboard/order"
             className="text-3xl hover:bg-primary text-primary hover:text-secondary rounded-lg h-10 flex justify-center items-center w-10"
           >
             <FaFileSignature />

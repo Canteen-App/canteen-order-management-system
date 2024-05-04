@@ -23,6 +23,26 @@ export interface Item {
   updatedAt: Date | string;
 }
 
+export interface Order {
+  id: string;
+  customer: {
+    id: string;
+    name: string;
+  };
+  items: OrderItem[];
+}
+
+export interface OrderItem {
+  id: string;
+  item: Item;
+  orderId: string;
+  itemId: string;
+  quantityCollected: number;
+  quantityt: number;
+  billedItemName?: string;
+  billedPricePerQuantity: string;
+}
+
 export enum CategoryType {
   NORMAL_CATEGORY = "NORMAL_CATEGORY",
   DAILY_MEAL = "DAILY_MEAL",
