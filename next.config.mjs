@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["shandongchinesekitchen.lk"],
+    domains: ["shandongchinesekitchen.lk", "firebasestorage.googleapis.com"],
   },
 };
 

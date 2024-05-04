@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }: any) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user: any) => {
       if (user) {
+        console.log(user);
         setUser(user);
         setLoading(false);
 
@@ -38,11 +39,13 @@ export const AuthProvider = ({ children }: any) => {
     router.push("/login");
   }
 
-  return (
-    <AuthContext.Provider value={AuthValues}>
-      {loading ? <div>Loading...</div> : <>{children}</>}
-    </AuthContext.Provider>
-  );
+  if (user) {
+    return (
+      <AuthContext.Provider value={AuthValues}>
+        {loading ? <div>Loading...</div> : <>{children}</>}
+      </AuthContext.Provider>
+    );
+  }
 };
 
 export const useAuth = () => {

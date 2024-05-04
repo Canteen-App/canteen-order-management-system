@@ -1,17 +1,19 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBMTdtVO4D6w16ecu5rqdu9cn17q48V3pM",
-  authDomain: "canteen-order-api.firebaseapp.com",
-  projectId: "canteen-order-api",
-  storageBucket: "canteen-order-api.appspot.com",
-  messagingSenderId: "933539250560",
-  appId: "1:933539250560:web:e805a8cdcec43d648d8165",
-  measurementId: "G-W53CM12CG7",
+  apiKey: "AIzaSyCt_5LXKaDsJNmtbAM6xLoF2wmHIxszG2s",
+  authDomain: "canteen-ordering-app.firebaseapp.com",
+  projectId: "canteen-ordering-app",
+  storageBucket: "canteen-ordering-app.appspot.com",
+  messagingSenderId: "41114026092",
+  appId: "1:41114026092:web:7c0125a1cb371eb6d29849",
+  measurementId: "G-BG3XGX7HV3",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+export const storage = getStorage(app);
