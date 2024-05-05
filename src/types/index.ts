@@ -30,6 +30,8 @@ export interface Order {
     name: string;
   };
   items: OrderItem[];
+  orderTime: string;
+  payment: Payment;
 }
 
 export interface OrderItem {
@@ -38,9 +40,23 @@ export interface OrderItem {
   orderId: string;
   itemId: string;
   quantityCollected: number;
-  quantityt: number;
+  quantity: number;
   billedItemName?: string;
   billedPricePerQuantity: string;
+}
+
+interface Payment {
+  id: string;
+  order?: Order;
+  orderId: string;
+  totalAmount: number;
+  paymentTime: Date;
+  status: PaymentStatus;
+}
+enum PaymentStatus {
+  CANCELED = "CANCELED",
+  PENDING = "PENDING",
+  COMPLETE = "COMPLETE",
 }
 
 export enum CategoryType {

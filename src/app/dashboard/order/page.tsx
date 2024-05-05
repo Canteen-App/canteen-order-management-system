@@ -1,93 +1,61 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { getOrders, getTodaysOrders } from "../../../services/orders";
 import { CategoryType, Order } from "@/src/types";
-import { getCategories } from "@/src/services/categories";
-import { getItemOrderDetails } from "@/src/services/items";
+import { getTodaysOrders } from "@/src/services/orders";
+import OrderCategoryView from "../../../components/Order/OrderCategoryView";
+import ViewOrderDetails from "../../../components/Order/ViewOrderDetails";
 
 const OrderPage = () => {
+  const [todaysOrders, setTodaysOrders] = useState<Order[]>([]);
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      const fetchedTodaysOrder = await getTodaysOrders();
+      setTodaysOrders(fetchedTodaysOrder);
+    };
+
+    getData();
+  }, []);
+
   return (
-    <div className="p-10">
-      <div className="text-5xl font-black text-primary">Orders</div>
-      <div>
-        <div className="text-3xl font-bold text-primary">
-          Total Items Ordered
-        </div>
-        <div className="flex w-full flex-wrap items-stetch">
+    <>
+      <div className="p-5 flex gap-4 h-screen">
+        <div className="p-4 h-full overflow-y-auto border-2 rounded-xl">
           <OrderCategoryView categoryType={CategoryType.DAILY_MEAL} />
           <OrderCategoryView categoryType={CategoryType.NORMAL_CATEGORY} />
         </div>
+        <div className="flex-grow overflow-hidden rounded-xl border-2 h-fit">
+          <table className="w-full">
+            {todaysOrders &&
+              todaysOrders.map((todaysOrder) => (
+                <tr className="border-2 mb-4 w-full h-fit">
+                  <td className="font-bold p-2">{todaysOrder.id}</td>
+                  <td className=""> {todaysOrder.customer.name}</td>
+                  <td>Rs {todaysOrder.payment.totalAmount}</td>
+                  <td>
+                    {new Date(todaysOrder.orderTime).toLocaleTimeString()}
+                  </td>
+                  <td className="p-2">
+                    <button
+                      onClick={() => setSelectedOrder(todaysOrder)}
+                      className="w-full p-2 font-black text-white rounded-xl bg-primary text-center "
+                    >
+                      View Details
+                    </button>
+                  </td>
+                </tr>
+              ))}
+          </table>
+        </div>
       </div>
-    </div>
-  );
-};
-
-const OrderCategoryView = ({
-  categoryType,
-}: {
-  categoryType: CategoryType;
-}) => {
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    const getData = async () => {
-      const fetchedCategories = await getCategories(categoryType);
-      setCategories(fetchedCategories);
-    };
-    getData();
-  }, [categoryType]);
-
-  return (
-    <div className="w-1/2 h-full">
-      <div className="text-2xl font-black text-primary">
-        {categoryType === CategoryType.DAILY_MEAL
-          ? "Daily Meal Orders"
-          : "Normal Item Orders"}
-      </div>
-      <div className="flex flex-wrap h-full items-stretch">
-        {categories.map((category: any, index: number) => (
-          <div key={index} className="w-1/2 p-2">
-            <div className="border-2 rounded-xl h-full p-2">
-              <div className="text-2xl font-bold text-primary">
-                {category.name}
-              </div>
-              <div className="">
-                {category.items.map((item: any) => (
-                  <ItemOrderView key={item.id} itemId={item.id} />
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const ItemOrderView = ({ itemId }: { itemId: string }) => {
-  const [itemOrder, setItemOrder] = useState<any>(null);
-
-  useEffect(() => {
-    const getData = async () => {
-      const fetchedItemDetails = await getItemOrderDetails(itemId);
-      setItemOrder(fetchedItemDetails);
-    };
-    getData();
-  }, [itemId]);
-
-  if (!itemOrder) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-    <div className="flex items-center cursor-default px-2 overflow-hidden h-fit hover:bg-[#ffb80688] select-none rounded-lg border-b-2">
-      <div className="relative w-full h-fit overflow-hidden">
-        <div className="text-primary text-xl">{itemOrder.name}</div>
-      </div>
-      <div className="font-black text-2xl h-fit text-primary">
-        {itemOrder._count.orderItems}
-      </div>
-    </div>
+      {selectedOrder && (
+        <ViewOrderDetails
+          orderDetails={selectedOrder}
+          setSelectedOrder={setSelectedOrder}
+        />
+      )}
+    </>
   );
 };
 
