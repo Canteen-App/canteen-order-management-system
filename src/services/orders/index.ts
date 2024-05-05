@@ -1,4 +1,4 @@
-import { Order } from "@/src/types";
+import { Order } from "../../types";
 import fetchAPI from "../../../axios";
 
 export const getOrders = async (): Promise<Order[]> => {
