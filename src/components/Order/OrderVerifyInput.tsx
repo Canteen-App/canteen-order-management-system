@@ -15,10 +15,6 @@ const OrderVerifyInput = ({ length = 4, onComplete }: InputProps) => {
   // if you're not using Typescript, do useState()
   const [pin, setPin] = useState<string[]>(Array(length).fill(""));
 
-  useEffect(() => {
-    console.log(parseInt(pin.join("")));
-  }, [pin]);
-
   const handleTextChange = (input: string, index: number) => {
     // Allow only numeric characters
     input = input.replace(/\D/g, ""); // Replace non-numeric characters with an empty string
@@ -28,7 +24,6 @@ const OrderVerifyInput = ({ length = 4, onComplete }: InputProps) => {
     setPin(newPin);
 
     // check if the user has entered the first digit, if yes, automatically focus on the next input field and so on.
-
     if (input.length === 1 && index < length - 1) {
       inputRef.current[index + 1]?.focus();
     }
@@ -37,11 +32,7 @@ const OrderVerifyInput = ({ length = 4, onComplete }: InputProps) => {
       inputRef.current[index - 1]?.focus();
     }
 
-    // if the user has entered all the digits, grab the digits and set as an argument to the onComplete function.
-
-    if (newPin.every((digit) => digit !== "")) {
-      onComplete(newPin.join(""));
-    }
+    onComplete(newPin.join(""));
   };
 
   return (
@@ -54,6 +45,7 @@ const OrderVerifyInput = ({ length = 4, onComplete }: InputProps) => {
             maxLength={1}
             value={pin[index]}
             onChange={(e) => handleTextChange(e.target.value, index)}
+            //@ts-expect-error Expect legacy type error
             ref={(ref) => (inputRef.current[index] = ref as HTMLInputElement)}
             className={`border border-primary focus:border-blue-600 p-4 w-[75px] text-center rounded-xl text-5xl outline-none`}
             style={{ marginRight: index === length - 1 ? "0" : "10px" }}

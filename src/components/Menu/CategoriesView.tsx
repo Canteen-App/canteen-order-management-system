@@ -60,8 +60,9 @@ const CategoriesView = ({ target }: { target: CategoryType }) => {
         <div className="mt-4 w-full">
           <div className="flex justify-between">
             <div className="flex w-fit rounded-lg overflow-hidden border-b-0 rounded-b-none">
-              {categories.map((category) => (
+              {categories.map((category, index) => (
                 <div
+                  key={index}
                   onClick={() => setSelectedCategory(category)}
                   className={`${
                     selectedCategory && category.name == selectedCategory.name
@@ -105,8 +106,9 @@ const CategoriesView = ({ target }: { target: CategoryType }) => {
             </div>
             <div className="overflow-auto pr-5 h-[350px] mt-5">
               <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-5">
-                {items.map((item) => (
+                {items.map((item, index) => (
                   <ItemCard
+                    key={index}
                     onClick={() => setSelectedItem(item)}
                     name={item.name}
                     price={item.price}

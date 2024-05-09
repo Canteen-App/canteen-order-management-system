@@ -24,6 +24,7 @@ const OrderItemView = ({
     setCollectAmount(
       orderItem.quantity - (orderItem.quantity - orderItem.quantityCollected)
     );
+    setCanReduceAmount(false);
   }, [orderItem]);
 
   useEffect(() => {
@@ -94,8 +95,9 @@ const OrderItemView = ({
       </div>
       <div className="text-3xl flex font-bold items-center gap-2">
         {orderItem.quantity == orderItem.quantityCollected ? (
-          <div>
-            {orderItem.quantityCollected}/{orderItem.quantity} Collected Fully
+          <div className="flex items-center gap-4 text-green-700">
+            <span className="text-2xl">Fully Collected</span>
+            {orderItem.quantityCollected}/{orderItem.quantity}
           </div>
         ) : (
           <>
