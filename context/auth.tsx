@@ -5,7 +5,7 @@ import { auth } from "@/config/firebase";
 
 export const AuthContext = createContext({
   user: null,
-  loading: false,
+  loading: true,
 });
 
 export const AuthProvider = ({ children }: any) => {
@@ -16,11 +16,8 @@ export const AuthProvider = ({ children }: any) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user: any) => {
       if (user) {
-        console.log(user);
         setUser(user);
         setLoading(false);
-
-        router.push("/dashboard");
       } else {
         setUser(null);
         setLoading(false);
@@ -30,22 +27,25 @@ export const AuthProvider = ({ children }: any) => {
     return unsubscribe;
   }, []);
 
+  // Move router.push() outside of useEffect
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push("/login");
+    } else if (!loading && user) {
+      router.push("/dashboard");
+    }
+  }, [loading, user]);
+
   const AuthValues = {
     user: user,
     loading: loading,
   };
 
-  if (!loading && !user) {
-    router.push("/login");
-  }
-
-  if (user) {
-    return (
-      <AuthContext.Provider value={AuthValues}>
-        {loading ? <div>Loading...</div> : <>{children}</>}
-      </AuthContext.Provider>
-    );
-  }
+  return (
+    <AuthContext.Provider value={AuthValues}>
+      {loading ? <div>Loading...</div> : <>{children}</>}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => {

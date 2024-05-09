@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getItemOrderDetails } from "../../services/items";
+import { useNewOrderNotification } from "../../../context/newOrderEvent";
 
 const ItemOrderView = ({ itemId }: { itemId: string }) => {
   const [itemOrder, setItemOrder] = useState<any>(null);
+
+  const { newOrderNotification } = useNewOrderNotification();
 
   useEffect(() => {
     const getData = async () => {
@@ -10,7 +13,7 @@ const ItemOrderView = ({ itemId }: { itemId: string }) => {
       setItemOrder(fetchedItemDetails);
     };
     getData();
-  }, [itemId]);
+  }, [itemId, newOrderNotification]);
 
   if (!itemOrder) {
     return <div>Loading...</div>;
