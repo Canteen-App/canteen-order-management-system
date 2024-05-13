@@ -29,16 +29,11 @@ const CreateCategory = ({
       toast.error("Name is not entered");
       return false;
     }
-
     if (target == CategoryType.NORMAL_CATEGORY) {
       const body = {
         name: name,
       };
-
       const newCategory = await createCategory(body, target);
-
-
-
       setCategories((prevCategories: Category[]) => {
         return [...prevCategories, newCategory];
       });
@@ -47,7 +42,6 @@ const CreateCategory = ({
       toast.success("Successfully created!");
 
       closeFunc(false);
-
       return;
     }
 
@@ -57,17 +51,13 @@ const CreateCategory = ({
         startTime: startTime,
         endTime: endTime,
       };
-
       const newCategory = await createCategory(body, target);
-
-
       setCategories((prevCategories: Category[]) => {
         return [...prevCategories, body];
       });
       setSelectedCategory(body);
 
       toast.success("Successfully created!");
-
       closeFunc(false);
     } else {
       toast.error("End Time is less than Start Time");
