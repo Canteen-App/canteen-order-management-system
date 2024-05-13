@@ -63,10 +63,9 @@ const ViewOrderDetails = ({
     <Modal closeFunc={() => setSelectedOrder(null)}>
       <>
         <div className="w-[600px] mt-2">
-          <div className="font-bold">{orderDetails.id}</div>
+          <div>{orderDetails.id}</div>
           <div className="flex justify-between text-xl">
-            <div className="font-bold"> {orderDetails.customer.name}</div>
-            <div>{new Date(orderDetails.orderTime).toLocaleTimeString()}</div>
+            <div className="font-black text-2xl"> {orderDetails.customer.name}</div>
           </div>
           <div className="mt-5 h-[400px] overflow-auto">
             {orderDetails.items.map((orderItem, index) => (

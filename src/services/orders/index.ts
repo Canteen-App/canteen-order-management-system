@@ -6,8 +6,8 @@ export const getOrders = async (): Promise<Order[]> => {
   return response.data;
 };
 
-export const getTodaysOrders = async (): Promise<Order[]> => {
-  const response = await fetchAPI.get(`/order/todays`);
+export const getOrderByDate = async (date?: string): Promise<Order[]> => {
+  const response = await fetchAPI.get(`/order?date=${date}`);
   return response.data;
 };
 

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 interface ItemsCollectedNotificationContextType {
   itemsCollectedNotification: { orderId: string } | null;
@@ -30,6 +31,9 @@ export const ItemsCollectedNotificationProvider = ({ children }: any) => {
     source.onmessage = (event) => {
       const data: { orderId: string } = JSON.parse(event.data);
       console.log("Items Collected:", data);
+      toast.success(
+        `Items Collected from Order Id: ${data.orderId.split("-")[0]}`
+      ); // Send Toast Notification
       setItemsCollectedNotification(data); // Update notification state when new order is received
     };
 

@@ -34,7 +34,6 @@ const CreateItem = ({
         categoryId: category.id,
       };
 
-
       const newItem = await createItem(body);
       if (newItem.id && file && target) {
         const imageURL = await uploadFile(file, newItem.id, target);

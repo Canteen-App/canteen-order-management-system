@@ -48,19 +48,15 @@ const EditItem = ({
         price,
         description,
       };
-
-      const newItem = await editItem(item.id, body);
-
-      setItem(newItem);
-
+      const updatedItem = await editItem(item.id, body);
+      setItem(updatedItem);
       setItems((prevItems) =>
         prevItems.map((prevItem) =>
-          prevItem.id == newItem.id ? newItem : prevItem
+          prevItem.id == updatedItem.id ? updatedItem : prevItem
         )
       );
       closeFunc(false);
     }
-
     if (item.id && file && target) {
       const imageURL = await uploadFile(file, item.id, target);
       if (imageURL) {

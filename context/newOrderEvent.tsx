@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 interface NewOrderNotificationContextType {
   newOrderNotification: { orderId: string } | null;
@@ -24,11 +25,10 @@ export const NewOrderNotificationProvider = ({ children }: any) => {
       `${process.env.NEXT_PUBLIC_API_URL}/events/check-new-orders`
     );
 
-    console.log(source)
-
     source.onmessage = (event) => {
       const data: { orderId: string } = JSON.parse(event.data);
       console.log("New order received:", data);
+      toast.success(`New Order Placed OrderId: ${data.orderId.split("-")[0]}`); // Send Toast Notification
       setNewOrderNotification(data); // Update notification state when new order is received
     };
 
