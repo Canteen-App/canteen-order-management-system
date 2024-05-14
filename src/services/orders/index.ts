@@ -7,13 +7,12 @@ export const getOrders = async (): Promise<Order[]> => {
 };
 
 export const getOrderByDate = async (date?: string): Promise<Order[]> => {
-  const response = await fetchAPI.get(`/order?date=${date}`);
+  const response = await fetchAPI.get(`/order/orders?date=${date}`);
   return response.data;
 };
 
 export const getOrderDetails = async (orderId: string): Promise<Order> => {
-  const response = await fetchAPI.get(`/order/todays/${orderId}`);
-  console.log(response);
+  const response = await fetchAPI.get(`/order/get-order/${orderId}`);
   return response.data;
 };
 
@@ -28,6 +27,5 @@ export const orderCollection = async (
   };
 
   const response = await fetchAPI.post(`/order/collection/${orderId}`, body);
-  console.log(response);
   return response.data;
 };
