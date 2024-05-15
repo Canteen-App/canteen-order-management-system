@@ -1,11 +1,6 @@
 import { Order } from "../../types";
 import fetchAPI from "../../../axios";
 
-export const getOrders = async (): Promise<Order[]> => {
-  const response = await fetchAPI.get(`/order/paid`);
-  return response.data;
-};
-
 export const getOrderByDate = async (date?: string): Promise<Order[]> => {
   const response = await fetchAPI.get(`/order/orders?date=${date}`);
   return response.data;
