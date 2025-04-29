@@ -53,7 +53,7 @@ const OrderVerifyInput = ({ length = 4, onComplete }: InputProps) => {
         ))}
       </div>
       <div className="text-xl text-center">
-        Get User's Order Verification Code
+        {"Get User's Order Verification Code"}
       </div>
     </div>
   );
